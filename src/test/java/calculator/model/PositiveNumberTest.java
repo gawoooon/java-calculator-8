@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("PositiveNumber 객체 생성 테스트")
-class PositiveNumberTest {
+public class PositiveNumberTest {
 
     @DisplayName("유효한 숫자 문자열(0 포함 양수)로 객체를 성공적으로 생성한다.")
     @ParameterizedTest
