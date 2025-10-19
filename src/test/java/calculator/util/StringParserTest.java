@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("사용자 정의 StringParser 테스트")
-class StringParserTest {
+public class StringParserTest {
 
     @DisplayName("기본 구분자(쉼표, 콜론)로 문자열을 올바르게 분리한다.")
     @Test

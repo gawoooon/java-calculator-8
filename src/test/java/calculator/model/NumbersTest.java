@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Numbers 일급 컬렉션 테스트")
-class NumbersTest {
+public class NumbersTest {
 
     @DisplayName("숫자 문자열 배열로 합계를 성공적으로 계산한다.")
     @Test
