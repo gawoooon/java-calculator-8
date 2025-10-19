@@ -4,7 +4,6 @@ package calculator.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import calculator.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,21 +28,25 @@ class PositiveNumberTest {
     void create_WithNegativeNumberString_ShouldThrowException() {
         // given
         String input = "-1";
+        String expectedMessage = "음수는 입력할 수 없습니다: " + input;
 
         // when & then
         assertThatThrownBy(() -> new PositiveNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NEGATIVE_NUMBER.getMessage(-1));
+                .hasMessage(expectedMessage);
     }
 
     @DisplayName("숫자 형식이 아닌 문자열로 객체 생성 시 IllegalArgumentException을 던진다.")
     @ParameterizedTest
     @ValueSource(strings = {"a", " ", "1a", "!"})
     void create_WithNonNumericString_ShouldThrowException(String input) {
+        // given
+        String expectedMessage = "입력된 문자열은 숫자 형식이어야 합니다: ";
+
         // when & then
         assertThatThrownBy(() -> new PositiveNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NOT_A_NUMBER.getMessage(input));
+                .hasMessage(expectedMessage + input);
     }
 
     @DisplayName("Integer 범위를 초과하는 숫자 문자열로 객체 생성 시 IllegalArgumentException을 던진다.")
@@ -52,10 +55,11 @@ class PositiveNumberTest {
         // given
         // Integer.MAX_VALUE = 2147483647
         String input = "2147483648";
+        String expectedMessage = "표현 가능한 정수 범위를 벗어났습니다: " + input;
 
         // when & then
         assertThatThrownBy(() -> new PositiveNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NOT_A_NUMBER.getMessage(input));
+                .hasMessage(expectedMessage);
     }
 }
