@@ -7,17 +7,24 @@ public class PositiveNumber {
     private final int number;
 
     public PositiveNumber(String numberString) {
-        int parsedNumber = parseNumber(numberString);
+        int parsedNumber = parseAndValidateNumber(numberString);
         validateSign(parsedNumber);
         this.number = parsedNumber;
     }
 
-    private int parseNumber(String numberString) {
+    private int parseAndValidateNumber(String numberString) {
+        long longValue;
         try {
-            return Integer.parseInt(numberString);
+            longValue = Long.parseLong(numberString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER.getMessage(numberString));
         }
+
+        if (longValue > Integer.MAX_VALUE || longValue < Integer.MIN_VALUE) {
+            throw new IllegalArgumentException(ErrorMessage.OUT_OF_INTEGER_RANGE.getMessage(numberString));
+        }
+
+        return (int) longValue;
     }
 
     private void validateSign(int number) {
