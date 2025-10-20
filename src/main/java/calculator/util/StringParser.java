@@ -7,19 +7,23 @@ public class StringParser {
     private static final String CUSTOM_DELIMITER_SUFFIX = "\n";
 
     public static String[] parse(String text) {
-        String customDelimiter = "";
-        if (validateIsCustomized(text)) {
-            int prefixIndex = text.indexOf(CUSTOM_DELIMITER_PREFIX);
-            int suffixIndex = text.indexOf(CUSTOM_DELIMITER_SUFFIX);
-            customDelimiter = text.substring(prefixIndex + 2, suffixIndex);
-            String sliceText = text.substring(suffixIndex + 1);
-            return sliceText.split(customDelimiter);
+        if(text == null || text.isEmpty()){
+            return new String[0];
         }
 
-        return text.split(DEFAULT_DELIMITER);
+        String delimiter = DEFAULT_DELIMITER;
+        String numbers = text;
+
+        if (IsCustomized(text)) {
+            int suffixIndex = text.indexOf(CUSTOM_DELIMITER_SUFFIX);
+            delimiter = text.substring(CUSTOM_DELIMITER_PREFIX.length(), suffixIndex);
+            numbers = text.substring(suffixIndex + 1);
+        }
+
+        return numbers.split(DEFAULT_DELIMITER);
     }
 
-    private static boolean validateIsCustomized(String text) {
+    private static boolean IsCustomized(String text) {
         return (text.startsWith(CUSTOM_DELIMITER_PREFIX) && text.contains(CUSTOM_DELIMITER_SUFFIX));
     }
 }
