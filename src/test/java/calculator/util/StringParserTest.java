@@ -25,7 +25,7 @@ public class StringParserTest {
     @Test
     void parse_WithCustomDelimiter_ShouldSplitNumbersPart() {
         // given
-        String input = "//;\n1;2;3";
+        String input = "//;\\n1;2;3";
 
         // when
         String[] result = StringParser.parse(input);
@@ -38,7 +38,7 @@ public class StringParserTest {
     @Test
     void parse_WithCustomDelimiter_ShouldSplitNumbersPartWithBlank() {
         // given
-        String input = "//;\n1; 2; 3 ";
+        String input = "//;\\n1; 2; 3 ";
 
         // when
         String[] result = StringParser.parse(input);
@@ -47,7 +47,7 @@ public class StringParserTest {
         assertThat(result).containsExactly("1", " 2", " 3 ");
     }
 
-    @DisplayName("입력 문자열이 비어있을 경우, 빈 문자열 하나를 포함한 배열을 반환한다.")
+    @DisplayName("입력 문자열이 비어있을 경우, 0을 포함한 배열을 반환한다")
     @Test
     void parse_WithEmptyString_ShouldReturnArrayWithEmptyString() {
         // given

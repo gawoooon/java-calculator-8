@@ -56,7 +56,7 @@ public class StringCalculatorTest {
     @Test
     void add_WithCustomDelimiter_ShouldReturnSum() {
         // when
-        int result = calculator.add("//;\n1;2;3");
+        int result = calculator.add("//;\\n1;2;3");
 
         // then
         assertThat(result).isEqualTo(6);
